@@ -9,51 +9,98 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      film_order: {
+      game_orders: {
         Row: {
           created_at: string
-          film: number
+          game: number
           id: number
-          orderer: string | null
-          orderer_username: string | null
+          orderer_username: string
         }
         Insert: {
           created_at?: string
-          film: number
+          game: number
           id?: number
-          orderer?: string | null
-          orderer_username?: string | null
+          orderer_username: string
         }
         Update: {
           created_at?: string
-          film?: number
+          game?: number
           id?: number
-          orderer?: string | null
-          orderer_username?: string | null
+          orderer_username?: string
         }
         Relationships: [
           {
-            foreignKeyName: "film_order_film_fkey"
-            columns: ["film"]
+            foreignKeyName: "game_orders_game_fkey"
+            columns: ["game"]
             isOneToOne: false
-            referencedRelation: "films"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "film_order_orderer_fkey"
-            columns: ["orderer"]
-            isOneToOne: false
-            referencedRelation: "users"
+            referencedRelation: "games"
             referencedColumns: ["id"]
           }
         ]
       }
-      films: {
+      games: {
+        Row: {
+          created_at: string
+          id: number
+          motivation: string
+          name: string
+          status: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          motivation: string
+          name: string
+          status: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          motivation?: string
+          name?: string
+          status?: string
+          url?: string
+        }
+        Relationships: []
+      }
+      movie_orders: {
+        Row: {
+          created_at: string
+          id: number
+          movie: number
+          orderer_username: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          movie: number
+          orderer_username?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          movie?: number
+          orderer_username?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "movie_orders_movie_fkey"
+            columns: ["movie"]
+            isOneToOne: false
+            referencedRelation: "movies"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      movies: {
         Row: {
           created_at: string
           id: number
           name: string | null
           release_year: number | null
+          status: string
           url: string | null
         }
         Insert: {
@@ -61,6 +108,7 @@ export interface Database {
           id?: number
           name?: string | null
           release_year?: number | null
+          status?: string
           url?: string | null
         }
         Update: {
@@ -68,6 +116,7 @@ export interface Database {
           id?: number
           name?: string | null
           release_year?: number | null
+          status?: string
           url?: string | null
         }
         Relationships: []

@@ -1,10 +1,11 @@
+import { Movie } from "@/model/supabase.model";
 import { BoxProps, Title } from "@mantine/core";
 
 type Props = BoxProps & {
     movie: Movie;
 };
 
-const getStatusColor = (status?: MovieStatus | null) => {
+const getStatusColor = (status?: string | null) => {
     switch (status) {
         case "watched":
             return "green";

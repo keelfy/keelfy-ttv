@@ -1,25 +1,18 @@
 "use client";
 
 import { Group } from "@mantine/core";
+import Link from "next/link";
 import classes from "./HeaderMenu.module.css";
 
 const HeaderMenu = () => {
     return (
         <Group gap="sm">
-            <a
-                href={"/games"}
-                className={classes.link}
-                onClick={(event) => event.preventDefault()}
-            >
+            <Link href="/games" className={classes.link}>
                 Игры
-            </a>
-            <a
-                href={"/movies"}
-                className={classes.link}
-                onClick={(event) => event.preventDefault()}
-            >
+            </Link>
+            <Link href="/movies" className={classes.link}>
                 Фильмы
-            </a>
+            </Link>
         </Group>
     );
 };
