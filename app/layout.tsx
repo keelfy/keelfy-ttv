@@ -6,6 +6,7 @@ import HeaderMenu from "@/components/HeaderMenu";
 import MyAppShellFooter from "@/components/shell/MyAppShellFooter";
 import MyAppShellHeader from "@/components/shell/MyAppShellHeader";
 import MyAppShellMain from "@/components/shell/MyAppShellMain";
+import ThemeButton from "@/components/theme-button/ThemeButton";
 import { createClient } from "@/utils/supabase/server";
 import {
     Anchor,
@@ -17,7 +18,6 @@ import {
     Text,
     createTheme,
 } from "@mantine/core";
-import { GeistSans } from "geist/font/sans";
 import { Montserrat } from "next/font/google";
 import { cookies } from "next/headers";
 import { ReactNode } from "react";
@@ -39,9 +39,7 @@ const theme = createTheme({
     primaryColor: "violet",
 });
 
-export default function RootLayout({
-    children,
-}: Readonly<{ children: ReactNode }>) {
+const RootLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
     const cookieStore = cookies();
 
     const canInitSupabaseClient = () => {
@@ -57,8 +55,14 @@ export default function RootLayout({
 
     const isSupabaseConnected = canInitSupabaseClient();
 
+    const supabase = createClient(cookieStore);
+
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
+
     return (
-        <html lang="en" className={GeistSans.className}>
+        <html lang="en">
             <head>
                 <ColorSchemeScript />
             </head>
@@ -78,7 +82,14 @@ export default function RootLayout({
                                         h="100%"
                                     >
                                         <HeaderMenu />
-                                        {isSupabaseConnected && <AuthButton />}
+                                        <Flex align="center" gap="md">
+                                            {isSupabaseConnected && (
+                                                <AuthButton
+                                                    logged={user !== null}
+                                                />
+                                            )}
+                                            <ThemeButton />
+                                        </Flex>
                                     </Flex>
                                 </Container>
                             </MyAppShellHeader>
@@ -108,4 +119,6 @@ export default function RootLayout({
             </body>
         </html>
     );
-}
+};
+
+export default RootLayout;

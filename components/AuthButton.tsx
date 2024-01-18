@@ -1,38 +1,30 @@
-import { createClient } from "@/utils/supabase/server";
+"use client";
+
+import { signInTwitch, signOut } from "@/app/actions/auth";
 import { Button } from "@mantine/core";
-import { cookies } from "next/headers";
-import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useTransition } from "react";
+import { FaSignOutAlt, FaTwitch } from "react-icons/fa";
 
-export default async function AuthButton() {
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+type Props = {
+    logged?: boolean;
+};
 
-    const {
-        data: { user },
-    } = await supabase.auth.getUser();
+const AuthButton = ({ logged }: Props) => {
+    const [isLoading, startTransition] = useTransition();
 
-    const signOut = async () => {
-        "use server";
-
-        const cookieStore = cookies();
-        const supabase = createClient(cookieStore);
-        await supabase.auth.signOut();
-        return redirect("/login");
-    };
-
-    return user ? (
-        <div className="flex items-center gap-4">
-            Hey, {user.email}!
-            <form action={signOut}>
-                <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
-                    Выйти
-                </button>
-            </form>
-        </div>
-    ) : (
-        <Button component={Link} href="/login" variant="light">
-            Войти
+    return (
+        <Button
+            onClick={() =>
+                logged
+                    ? startTransition(signOut)
+                    : startTransition(signInTwitch)
+            }
+            leftSection={logged ? <FaSignOutAlt /> : <FaTwitch />}
+            loading={isLoading}
+        >
+            {logged ? "Выйти" : "Продолжить с Twitch"}
         </Button>
     );
-}
+};
+
+export default AuthButton;
