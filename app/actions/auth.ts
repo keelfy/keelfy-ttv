@@ -25,6 +25,9 @@ export const signInTwitch = async () => {
         data: { url },
     } = await supabase.auth.signInWithOAuth({
         provider: "twitch",
+        options: {
+            redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`,
+        },
     });
 
     if (error || !url) {

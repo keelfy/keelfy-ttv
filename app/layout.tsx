@@ -66,8 +66,8 @@ const RootLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
             <head>
                 <ColorSchemeScript />
             </head>
-            <body className="bg-background text-foreground">
-                <main className="min-h-screen flex flex-col items-center">
+            <body>
+                <main>
                     <MantineProvider theme={theme}>
                         <AppShell
                             header={{ height: 60 }}
@@ -84,9 +84,17 @@ const RootLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
                                         <HeaderMenu />
                                         <Flex align="center" gap="md">
                                             {isSupabaseConnected && (
-                                                <AuthButton
-                                                    logged={user !== null}
-                                                />
+                                                <>
+                                                    <Text fw={700} c="violet">
+                                                        {
+                                                            user?.user_metadata
+                                                                .name
+                                                        }
+                                                    </Text>
+                                                    <AuthButton
+                                                        logged={user !== null}
+                                                    />
+                                                </>
                                             )}
                                             <ThemeButton />
                                         </Flex>
@@ -105,7 +113,6 @@ const RootLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
                                         <Anchor
                                             href="https://keelfy.dev"
                                             target="_blank"
-                                            className="font-bold hover:underline"
                                             rel="noreferrer"
                                         >
                                             keelfy

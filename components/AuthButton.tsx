@@ -21,6 +21,7 @@ const AuthButton = ({ logged }: Props) => {
             }
             leftSection={logged ? <FaSignOutAlt /> : <FaTwitch />}
             loading={isLoading}
+            variant="light"
         >
             {logged ? "Выйти" : "Продолжить с Twitch"}
         </Button>

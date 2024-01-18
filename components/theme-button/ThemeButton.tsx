@@ -24,7 +24,7 @@ const ThemeButton = () => {
                         computedColorScheme === "light" ? "dark" : "light"
                     )
                 }
-                variant="subtle"
+                variant="light"
                 size="lg"
                 aria-label="Toggle color scheme"
             >
