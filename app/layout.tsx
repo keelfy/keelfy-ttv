@@ -19,7 +19,6 @@ import {
     MantineProvider,
     Stack,
     Text,
-    Title,
     createTheme,
 } from "@mantine/core";
 import { Montserrat } from "next/font/google";
@@ -156,35 +155,55 @@ const RootLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
                                             keelfy
                                         </Anchor>
                                     </Flex>
-                                    <BurgerMenu />
+                                    <Flex align="center" gap="md">
+                                        {user?.user_metadata.name && (
+                                            <Text fw={700} c="violet">
+                                                {user?.user_metadata.name}
+                                            </Text>
+                                        )}
+                                        <BurgerMenu />
+                                    </Flex>
                                 </Flex>
                             </MyAppShellHeader>
 
                             <MyAppShellNavbar hiddenFrom="xs" p="md">
-                                <Stack gap="md">
-                                    <Flex gap="sm" align="center">
-                                        <Image
-                                            src="/gaming.webp"
-                                            width={30}
-                                            height={30}
-                                            alt="7tv emote"
-                                        />
-                                        <Anchor href="/games" size="lg">
-                                            Игры
-                                        </Anchor>
+                                <Flex
+                                    h="100%"
+                                    justify="space-between"
+                                    direction="column"
+                                >
+                                    <Stack gap="md">
+                                        <Flex gap="sm" align="center">
+                                            <Image
+                                                src="/gaming.webp"
+                                                width={30}
+                                                height={30}
+                                                alt="7tv emote"
+                                            />
+                                            <Anchor href="/games" size="lg">
+                                                Игры
+                                            </Anchor>
+                                        </Flex>
+                                        <Flex gap="sm" align="center">
+                                            <Image
+                                                src="/moviE.webp"
+                                                width={30}
+                                                height={30}
+                                                alt="7tv emote"
+                                            />
+                                            <Anchor href="/movies" size="lg">
+                                                Фильмы
+                                            </Anchor>
+                                        </Flex>
+                                    </Stack>
+                                    <Flex
+                                        align="center"
+                                        justify="space-between"
+                                    >
+                                        <AuthButton logged={user !== null} />
+                                        <ThemeButton />
                                     </Flex>
-                                    <Flex gap="sm" align="center">
-                                        <Image
-                                            src="/moviE.webp"
-                                            width={30}
-                                            height={30}
-                                            alt="7tv emote"
-                                        />
-                                        <Anchor href="/movies" size="lg">
-                                            Фильмы
-                                        </Anchor>
-                                    </Flex>
-                                </Stack>
+                                </Flex>
                             </MyAppShellNavbar>
 
                             <MyAppShellMain>
