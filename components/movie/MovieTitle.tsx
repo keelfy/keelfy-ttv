@@ -25,7 +25,6 @@ const MovieTitle = ({ movie, participant, ...props }: Props) => {
             {...(getStatusColor(movie?.status, participant) !== null
                 ? { c: getStatusColor(movie?.status, participant)! }
                 : {})}
-            truncate="start"
             {...props}
         >
             {movie?.name}
