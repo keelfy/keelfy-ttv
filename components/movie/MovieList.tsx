@@ -25,8 +25,12 @@ const MovieList = (props: BoxProps) => {
     const [movies, setMovies] = useState<Movie[]>([]);
 
     const countOrdersOfMovieId = (movieId: number) => {
-        return orders?.filter((order) => order.movie === movieId).length ?? 1;
+        return orders?.filter((order) => order.movie === movieId).length ?? 0;
     };
+
+    const MIN_ORDERS = parseInt(
+        process.env.NEXT_PUBLIC_MIN_ORDERS_FOR_MOVIE ?? "2"
+    );
 
     const getChanceOfMovie = (movieId: number) => {
         const quantity = countOrdersOfMovieId(movieId);
@@ -34,7 +38,8 @@ const MovieList = (props: BoxProps) => {
             movies
                 ?.filter((movie) => movie.status === "unwatched")
                 ?.map((movie) => countOrdersOfMovieId(movie.id))
-                .reduce((a, b) => a + b, 0) ?? 1;
+                .filter((quantity) => quantity >= MIN_ORDERS)
+                .reduce((a, b) => a + b, 0) ?? 0;
         return quantity / ordersQuantity;
     };
 

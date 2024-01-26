@@ -36,7 +36,9 @@ const ShowMovieOrderButton = ({
                     <MovieOrderCountBox
                         orderCount={orderCount}
                         chance={
-                            movie.status !== "unwatched" ? undefined : chance
+                            movie.status !== "unwatched" || !participant
+                                ? undefined
+                                : chance
                         }
                     />
                 }

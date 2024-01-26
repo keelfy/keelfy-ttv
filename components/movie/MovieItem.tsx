@@ -8,6 +8,19 @@ type Props = BoxProps & {
     chance?: number;
 };
 
+const getStatusTranslation = (status: string | null) => {
+    switch (status) {
+        case "watched":
+            return "Просмотрен";
+        case "unwatched":
+            return "Не просмотрен";
+        case "next":
+            return "Следующий";
+        default:
+            return status;
+    }
+};
+
 const MovieItem = ({ movie, orders, chance, ...props }: Props) => {
     const MIN_ORDERS = parseInt(
         process.env.NEXT_PUBLIC_MIN_ORDERS_FOR_MOVIE ?? "2"
@@ -31,14 +44,33 @@ const MovieItem = ({ movie, orders, chance, ...props }: Props) => {
                                 Ссылка для просмотра
                             </Anchor>
                         )}
+                        <Flex gap="xs">
+                            <Text c="dimmed">Статус:</Text>
+                            <Text
+                                c={
+                                    movie.status === "watched"
+                                        ? "green"
+                                        : undefined
+                                }
+                                variant={
+                                    movie.status === "next"
+                                        ? "gradient"
+                                        : undefined
+                                }
+                                gradient={{
+                                    from: "grape",
+                                    to: "green",
+                                    deg: 90,
+                                }}
+                            >
+                                {getStatusTranslation(movie.status)}
+                            </Text>
+                        </Flex>
                         {movie.release_year && (
                             <Flex gap="xs" hiddenFrom="xs">
                                 <Text c="dimmed">Год выхода:</Text>
                                 <Text>{movie.release_year}</Text>
                             </Flex>
-                        )}
-                        {movie.status === "next" && (
-                            <Text fw={700}>Выпал в рулетке</Text>
                         )}
                         <Flex gap="xs">
                             <Text c="dimmed">

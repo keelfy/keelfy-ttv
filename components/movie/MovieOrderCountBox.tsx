@@ -7,11 +7,11 @@ type Props = BoxProps & {
 
 const MovieOrderCountBox = ({ orderCount, chance, ...props }: Props) => {
     return (
-        <Flex w={90} gap="xs" align="center" justify="center" {...props}>
-            <Text fw={700}>{orderCount}</Text>
-            <Text fw={500}>
-                ({chance ? Math.round(chance * 100) : <>&mdash;</>}%)
+        <Flex w={90} gap="xs" align="center" justify="flex-start" {...props}>
+            <Text fw={700} c="yellow">
+                {orderCount}
             </Text>
+            <Text>{chance ? (chance * 100).toFixed(1) : <>&mdash;</>}%</Text>
         </Flex>
     );
 };

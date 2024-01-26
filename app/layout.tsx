@@ -73,11 +73,7 @@ const RootLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
             <body>
                 <main>
                     <MantineProvider theme={theme}>
-                        <MyAppShell
-                            header={{ height: 60 }}
-                            footer={{ height: 40 }}
-                            padding="md"
-                        >
+                        <MyAppShell header={{ height: 60 }} padding="md">
                             <MyAppShellHeader>
                                 <Container h="100%" visibleFrom="xs">
                                     <Flex
@@ -209,21 +205,6 @@ const RootLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
                             <MyAppShellMain>
                                 <Container h="100%">{children}</Container>
                             </MyAppShellMain>
-
-                            <MyAppShellFooter>
-                                <Flex align="center" justify="center" h="100%">
-                                    <Text>
-                                        Created by&nbsp;
-                                        <Anchor
-                                            href="https://keelfy.dev"
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >
-                                            keelfy
-                                        </Anchor>
-                                    </Text>
-                                </Flex>
-                            </MyAppShellFooter>
                         </MyAppShell>
                     </MantineProvider>
                 </main>
