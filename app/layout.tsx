@@ -2,24 +2,29 @@ import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 
 import AuthButton from "@/components/AuthButton";
+import BurgerMenu from "@/components/BurgerMenu";
 import HeaderMenu from "@/components/HeaderMenu";
+import MyAppShell from "@/components/shell/MyAppShell";
 import MyAppShellFooter from "@/components/shell/MyAppShellFooter";
 import MyAppShellHeader from "@/components/shell/MyAppShellHeader";
 import MyAppShellMain from "@/components/shell/MyAppShellMain";
+import MyAppShellNavbar from "@/components/shell/MyAppShellNavbar";
 import ThemeButton from "@/components/theme-button/ThemeButton";
 import { createClient } from "@/utils/supabase/server";
 import {
     Anchor,
-    AppShell,
     ColorSchemeScript,
     Container,
     Flex,
     MantineProvider,
+    Stack,
     Text,
+    Title,
     createTheme,
 } from "@mantine/core";
 import { Montserrat } from "next/font/google";
 import { cookies } from "next/headers";
+import Image from "next/image";
 import { ReactNode } from "react";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -69,19 +74,41 @@ const RootLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
             <body>
                 <main>
                     <MantineProvider theme={theme}>
-                        <AppShell
+                        <MyAppShell
                             header={{ height: 60 }}
                             footer={{ height: 40 }}
                             padding="md"
                         >
                             <MyAppShellHeader>
-                                <Container h="100%">
+                                <Container h="100%" visibleFrom="xs">
                                     <Flex
                                         justify="space-between"
                                         align="center"
                                         h="100%"
                                     >
-                                        <HeaderMenu />
+                                        <Flex gap="md" align="center">
+                                            <Flex
+                                                gap="sm"
+                                                align="center"
+                                                justify="center"
+                                            >
+                                                <Image
+                                                    src="/peepoClap.webp"
+                                                    width={30}
+                                                    height={30}
+                                                    alt="7tv emote"
+                                                />
+                                                <Anchor
+                                                    size="xl"
+                                                    fw={700}
+                                                    c="violet"
+                                                    href="https://twitch.tv/keelfy"
+                                                >
+                                                    keelfy
+                                                </Anchor>
+                                            </Flex>
+                                            <HeaderMenu />
+                                        </Flex>
                                         <Flex align="center" gap="md">
                                             {isSupabaseConnected && (
                                                 <>
@@ -100,7 +127,65 @@ const RootLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
                                         </Flex>
                                     </Flex>
                                 </Container>
+                                <Flex
+                                    w="100%"
+                                    hiddenFrom="xs"
+                                    justify="space-between"
+                                    align="center"
+                                    h="100%"
+                                    p="md"
+                                    gap="md"
+                                >
+                                    <Flex
+                                        gap="sm"
+                                        align="center"
+                                        justify="center"
+                                    >
+                                        <Image
+                                            src="/peepoClap.webp"
+                                            width={30}
+                                            height={30}
+                                            alt="7tv emote"
+                                        />
+                                        <Anchor
+                                            size="xl"
+                                            fw={700}
+                                            c="violet"
+                                            href="https://twitch.tv/keelfy"
+                                        >
+                                            keelfy
+                                        </Anchor>
+                                    </Flex>
+                                    <BurgerMenu />
+                                </Flex>
                             </MyAppShellHeader>
+
+                            <MyAppShellNavbar hiddenFrom="xs" p="md">
+                                <Stack gap="md">
+                                    <Flex gap="sm" align="center">
+                                        <Image
+                                            src="/gaming.webp"
+                                            width={30}
+                                            height={30}
+                                            alt="7tv emote"
+                                        />
+                                        <Anchor href="/games" size="lg">
+                                            Игры
+                                        </Anchor>
+                                    </Flex>
+                                    <Flex gap="sm" align="center">
+                                        <Image
+                                            src="/moviE.webp"
+                                            width={30}
+                                            height={30}
+                                            alt="7tv emote"
+                                        />
+                                        <Anchor href="/movies" size="lg">
+                                            Фильмы
+                                        </Anchor>
+                                    </Flex>
+                                </Stack>
+                            </MyAppShellNavbar>
 
                             <MyAppShellMain>
                                 <Container h="100%">{children}</Container>
@@ -120,7 +205,7 @@ const RootLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
                                     </Text>
                                 </Flex>
                             </MyAppShellFooter>
-                        </AppShell>
+                        </MyAppShell>
                     </MantineProvider>
                 </main>
             </body>

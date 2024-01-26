@@ -13,6 +13,7 @@ type Props = BoxProps & {
     orderCount?: number;
     children: ReactNode;
     chance?: number;
+    participant?: boolean;
 };
 
 const ShowMovieOrderButton = ({
@@ -20,6 +21,7 @@ const ShowMovieOrderButton = ({
     children,
     orderCount = 0,
     chance,
+    participant,
 }: Props) => {
     const [opened, { toggle }] = useDisclosure(false);
 
@@ -37,10 +39,12 @@ const ShowMovieOrderButton = ({
                         }
                     />
                 }
+                fullWidth
+                px="xs"
             >
                 <Group wrap="nowrap">
                     {opened ? <BiCollapseVertical /> : <BiExpandVertical />}
-                    <MovieTitle movie={movie} />
+                    <MovieTitle movie={movie} participant={participant} />
                 </Group>
             </Button>
             <Transition

@@ -8,9 +8,19 @@
     font-size: var(--mantine-font-size-sm);
     font-weight: 500;
 
+    border: 1px solid transparent;
+    transition: border-color 100ms ease, background-color 200ms ease;
+
     @mixin hover {
+        border-color: light-dark(
+            var(--mantine-color-violet-2),
+            var(--mantine-color-violet-9)
+        );
+    }
+
+    &[data-active="true"] {
         background-color: light-dark(
-            var(--mantine-color-gray-0),
+            var(--mantine-color-gray-1),
             var(--mantine-color-dark-6)
         );
     }

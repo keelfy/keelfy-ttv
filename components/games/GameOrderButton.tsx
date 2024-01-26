@@ -1,7 +1,7 @@
 "use client";
 
 import { Game } from "@/model/supabase.model";
-import { BoxProps, Button, Group, Transition } from "@mantine/core";
+import { BoxProps, Button, Flex, Transition } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { ReactNode } from "react";
 import { BiCollapseVertical, BiExpandVertical } from "react-icons/bi";
@@ -17,11 +17,16 @@ const GameOrderButton = ({ game, children }: Props) => {
 
     return (
         <>
-            <Button variant="subtle" onClick={toggle} justify="space-between">
-                <Group wrap="nowrap">
+            <Button
+                variant="subtle"
+                onClick={toggle}
+                justify="space-between"
+                px="xs"
+            >
+                <Flex gap="xs" align="center">
                     {opened ? <BiCollapseVertical /> : <BiExpandVertical />}
                     <GameTitle game={game} />
-                </Group>
+                </Flex>
             </Button>
             <Transition
                 mounted={opened}

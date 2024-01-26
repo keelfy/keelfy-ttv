@@ -45,7 +45,7 @@ export interface Database {
           motivation: string
           name: string
           status: string
-          url: string
+          url: string | null
         }
         Insert: {
           created_at?: string
@@ -53,7 +53,7 @@ export interface Database {
           motivation: string
           name: string
           status: string
-          url: string
+          url?: string | null
         }
         Update: {
           created_at?: string
@@ -61,7 +61,7 @@ export interface Database {
           motivation?: string
           name?: string
           status?: string
-          url?: string
+          url?: string | null
         }
         Relationships: []
       }
@@ -102,6 +102,7 @@ export interface Database {
           release_year: number | null
           status: string
           url: string | null
+          watched_at: string | null
         }
         Insert: {
           created_at?: string
@@ -110,6 +111,7 @@ export interface Database {
           release_year?: number | null
           status?: string
           url?: string | null
+          watched_at?: string | null
         }
         Update: {
           created_at?: string
@@ -118,6 +120,7 @@ export interface Database {
           release_year?: number | null
           status?: string
           url?: string | null
+          watched_at?: string | null
         }
         Relationships: []
       }

@@ -21,7 +21,7 @@ const GameTitle = ({ game, ...props }: Props) => {
             {...props}
         >
             <Text span>{game?.name}</Text>
-            <Text span size="sm" tt="uppercase" c="dimmed">
+            <Text span size="sm" tt="uppercase" c="dimmed" visibleFrom="xs">
                 &nbsp;&mdash;&nbsp;{getStatusText(game.status)}
             </Text>
         </Title>

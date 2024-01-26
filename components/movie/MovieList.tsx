@@ -4,12 +4,12 @@ import {
     fetchMoviesOrderers,
     fetchRequestedMovies,
 } from "@/app/actions/movies";
+import { Movie, MovieOrder } from "@/model/supabase.model";
 import { BoxProps, Input, Loader, Stack } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useEffect, useState, useTransition } from "react";
 import { MdSearch } from "react-icons/md";
 import MovieItem from "./MovieItem";
-import { Movie, MovieOrder } from "@/model/supabase.model";
 
 const MovieList = (props: BoxProps) => {
     const [searchReq, setSearchReq] = useState("");
@@ -38,8 +38,12 @@ const MovieList = (props: BoxProps) => {
         return quantity / ordersQuantity;
     };
 
-    const compareMovies = (a: Movie, b: Movie) => {
+    const compareMovieChances = (a: Movie, b: Movie) => {
         return countOrdersOfMovieId(a.id) > countOrdersOfMovieId(b.id) ? -1 : 1;
+    };
+
+    const compareMovieCreationDate = (a: Movie, b: Movie) => {
+        return a.created_at > b.created_at ? -1 : 1;
     };
 
     const getMovieItem = (movie: Movie) => (
@@ -86,7 +90,8 @@ const MovieList = (props: BoxProps) => {
                 .map(getMovieItem)}
             {movies
                 ?.filter((movie) => movie.status !== "watched")
-                .sort(compareMovies)
+                .sort(compareMovieCreationDate)
+                .sort(compareMovieChances)
                 .map(getMovieItem)}
         </Stack>
     );

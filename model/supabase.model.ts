@@ -1,6 +1,9 @@
+import { MantineColor, StyleProp } from "@mantine/core";
+
 export type Movie = {
     id: number;
     created_at: string;
+    watched_at: string | null;
     name: string | null;
     release_year: number | null;
     url: string | null;
@@ -46,7 +49,7 @@ export type GameOrder = {
 export type GameStatusInfo = {
     name: string;
     translation: string;
-    color: string;
+    color: StyleProp<MantineColor>;
 };
 
 export const GAME_STATUSES: GameStatusInfo[] = [
