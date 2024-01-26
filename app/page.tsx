@@ -1,10 +1,10 @@
 import NavigationPaper from "@/components/home/NavigationPaper";
-import { Flex, SimpleGrid, Title } from "@mantine/core";
+import { Flex, Stack, Title } from "@mantine/core";
 import Image from "next/image";
 
 const IndexPage = async () => {
     return (
-        <SimpleGrid cols={2} w="100%" h="100%">
+        <Stack w="100%">
             <NavigationPaper href="/games">
                 <Flex gap="sm" align="center">
                     <Image
@@ -27,7 +27,7 @@ const IndexPage = async () => {
                     <Title order={4}>Заказанные фильмы</Title>
                 </Flex>
             </NavigationPaper>
-        </SimpleGrid>
+        </Stack>
     );
 };
 

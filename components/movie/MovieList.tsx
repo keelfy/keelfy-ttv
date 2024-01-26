@@ -5,7 +5,7 @@ import {
     fetchRequestedMovies,
 } from "@/app/actions/movies";
 import { Movie, MovieOrder } from "@/model/supabase.model";
-import { BoxProps, Input, Loader, Stack } from "@mantine/core";
+import { BoxProps, Divider, Input, Loader, Stack } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useEffect, useState, useTransition } from "react";
 import { MdSearch } from "react-icons/md";
@@ -86,10 +86,13 @@ const MovieList = (props: BoxProps) => {
                 onChange={(e) => setSearchReq(e.currentTarget.value)}
             />
             {movies
+                ?.filter((movie) => movie.status === "next")
+                .map(getMovieItem)}
+            {movies
                 ?.filter((movie) => movie.status === "watched")
                 .map(getMovieItem)}
             {movies
-                ?.filter((movie) => movie.status !== "watched")
+                ?.filter((movie) => movie.status === "unwatched")
                 .sort(compareMovieCreationDate)
                 .sort(compareMovieChances)
                 .map(getMovieItem)}

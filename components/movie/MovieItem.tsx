@@ -37,6 +37,9 @@ const MovieItem = ({ movie, orders, chance, ...props }: Props) => {
                                 <Text>{movie.release_year}</Text>
                             </Flex>
                         )}
+                        {movie.status === "next" && (
+                            <Text fw={700}>Выпал в рулетке</Text>
+                        )}
                         <Flex gap="xs">
                             <Text c="dimmed">
                                 Заказчик{orders.length > 1 ? "и" : ""}:
@@ -59,20 +62,17 @@ const MovieItem = ({ movie, orders, chance, ...props }: Props) => {
                                 ))}
                             </Stack>
                         </Flex>
-                        {movie.status === "watched" ? (
+                        {movie.status === "watched" && movie.watched_at && (
                             <Flex gap="xs">
                                 <Text c="dimmed">Просмотрено:</Text>
-                                {movie.watched_at ? (
-                                    <Text>
-                                        {new Date(
-                                            movie.watched_at
-                                        ).toLocaleDateString()}
-                                    </Text>
-                                ) : (
-                                    <Text>Неизвестно</Text>
-                                )}
+                                <Text>
+                                    {new Date(
+                                        movie.watched_at
+                                    ).toLocaleDateString()}
+                                </Text>
                             </Flex>
-                        ) : (
+                        )}
+                        {movie.status === "unwatched" && (
                             <Flex gap="xs">
                                 <Text c="dimmed">Участвует в рулетке?</Text>
                                 <Text>{participant ? "Да" : "Нет"}</Text>

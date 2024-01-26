@@ -28,7 +28,8 @@ const ShowMovieOrderButton = ({
     return (
         <>
             <Button
-                variant="subtle"
+                variant={movie.status === "next" ? "gradient" : "subtle"}
+                gradient={{ from: "grape", to: "green", deg: 90 }}
                 onClick={toggle}
                 justify="space-between"
                 rightSection={
