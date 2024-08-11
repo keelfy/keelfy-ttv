@@ -32,7 +32,7 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
     metadataBase: new URL(defaultUrl),
-    title: "KEELFY TTV",
+    title: "Планы Кифли",
     description: "keelfy tools",
 };
 
